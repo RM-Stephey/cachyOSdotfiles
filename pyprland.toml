@@ -4,7 +4,7 @@ plugins = ["scratchpads"]
 [scratchpads.term_kitty]
 animation = "fromTop"
 #command = "kitty --class term_kitty"
-command = "wezterm start --always-new-process --class term_wezterm"
+command = "wezterm start --always-new-process"
 class = "term_kitty"
 focus_on_visible = false
 lazy = true
