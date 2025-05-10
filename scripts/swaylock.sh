@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Cyberpunk-themed lock screen
+swaylock \
+    -f \
+    -S \
+    --clock \
+    --indicator \
+    --indicator-idle-visible \
+    -e \
+    -F \
+    --grace 3 \
+    --grace-no-mouse \
+    --grace-no-touch \
+    --indicator-radius 120 \
+    --indicator-thickness 10 \
+    --timestr "%-I:%M %p" \
+    --datestr "%A, %B %d" \
+    --effect-blur 8x4 \
+    --effect-pixelate 2 \
+    --effect-vignette 0.2:0.5 \
+    -s center \
+    --key-hl-color ff00ff \
+    --bs-hl-color 00d8ff \
+    --caps-lock-key-hl-color c210ff \
+    --caps-lock-bs-hl-color ff00ff \
+    --inside-color 00000088 \
+    --inside-clear-color 00000088 \
+    --inside-caps-lock-color 00000088 \
+    --inside-ver-color 00000088 \
+    --inside-wrong-color 00000088 \
+    --ring-color df2d82ff \
+    --ring-clear-color 00d8ffff \
+    --ring-caps-lock-color c210ffff \
+    --ring-ver-color 00aa84ff \
+    --ring-wrong-color f26840ff \
+    --separator-color 00000000 \
+    --line-color 00000000 \
+    --line-clear-color 00000000 \
+    --line-caps-lock-color 00000000 \
+    --line-ver-color 00000000 \
+    --line-wrong-color 00000000 \
+    --text-color ffffffff \
+    --text-clear-color 00d8ffff \
+    --text-caps-lock-color c210ffff \
+    --text-ver-color 00aa84ff \
+    --text-wrong-color f26840ff

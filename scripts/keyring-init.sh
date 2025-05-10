@@ -1,27 +1,19 @@
-#!/usr/bin/fish
+#!/usr/bin/env fish
 
-# Kill any existing keyring processes
-pkill -9 gnome-keyring-daemon
-
-# Start GNOME Keyring
-/usr/bin/gnome-keyring-daemon --start --components=secrets &
-
-# Wait for keyring to be available
-while not test -f /run/user/(id -u)/keyring/control
-    sleep 1
+# Ensure GNOME Keyring is running and unlocked
+if pgrep -x "gnome-keyring-d" > /dev/null
+    # Try to unlock the keyring 
+    echo "Unlocking keyring..."
+    echo $PASSWORD | gnome-keyring-daemon --unlock
+    
+    # Test if it worked
+    if begin; echo "Test" | secret-tool store --label="Test" service test key test 2>/dev/null; end
+        echo "Keyring unlocked successfully!"
+        secret-tool lookup service test key test
+        secret-tool clear service test key test
+    else
+        echo "Keyring unlock failed or already unlocked"
+    end
+else
+    echo "GNOME Keyring daemon not running"
 end
-
-# Configure 1Password system authentication
-mkdir -p ~/.config/1Password/settings
-echo '{
-  "version": 1,
-  "systemAuthentication": {
-    "enabled": true,
-    "useSecretService": true,
-    "autoUnlock": true
-  }
-}' > ~/.config/1Password/settings/authentication.json
-
-# Start 1Password with system authentication and Wayland support
-sleep 2
-/opt/1Password/1password --ozone-platform-hint=auto --silent --use-system-authentication 

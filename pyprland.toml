@@ -3,8 +3,15 @@ plugins = ["scratchpads"]
 
 [scratchpads.term_kitty]
 animation = "fromTop"
-#command = "kitty --class term_kitty"
-command = "wezterm start --always-new-process"
+command = "kitty --class term_kitty"
+#command = "wezterm start --always-new-process"
 class = "term_kitty"
+focus_on_visible = false
+lazy = true
+
+[scratchpads.term_wezterm]
+animation = "fromTop"
+command = "wezterm start --config-file /home/stephey/.config/hypr/pyprland-wezterm.lua --class wezterm_scratch"
+class = "wezterm_scratch"
 focus_on_visible = false
 lazy = true
