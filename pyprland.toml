@@ -11,7 +11,7 @@ lazy = true
 
 [scratchpads.term_wezterm]
 animation = "fromTop"
-command = "wezterm start --config-file /home/stephey/.config/hypr/pyprland-wezterm.lua --class wezterm_scratch"
+command = "wezterm start --config-file /home/stephey/.config/wezterm/wezterm.lua --class wezterm_scratch"
 class = "wezterm_scratch"
 focus_on_visible = false
 lazy = true

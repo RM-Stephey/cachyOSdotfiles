@@ -3,15 +3,12 @@
 # Cyberpunk-themed lock screen
 swaylock \
     -f \
-    -S \
+    --screenshots \
     --clock \
     --indicator \
     --indicator-idle-visible \
     -e \
     -F \
-    --grace 3 \
-    --grace-no-mouse \
-    --grace-no-touch \
     --indicator-radius 120 \
     --indicator-thickness 10 \
     --timestr "%-I:%M %p" \
@@ -19,7 +16,7 @@ swaylock \
     --effect-blur 8x4 \
     --effect-pixelate 2 \
     --effect-vignette 0.2:0.5 \
-    -s center \
+    --scaling center \
     --key-hl-color ff00ff \
     --bs-hl-color 00d8ff \
     --caps-lock-key-hl-color c210ff \

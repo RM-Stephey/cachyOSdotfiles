@@ -1,0 +1,131 @@
+{
+  "name": "Auto-saved on logout",
+  "timestamp": "2025-08-04 21:44:39",
+  "windows": [
+    {
+      "address": "0x55e49c5e8d70",
+      "mapped": true,
+      "hidden": false,
+      "at": [15, 78],
+      "size": [2530, 1507],
+      "workspace": {
+        "id": 1,
+        "name": "1"
+      },
+      "floating": false,
+      "pseudo": false,
+      "monitor": 0,
+      "class": "dev.zed.Zed",
+      "title": "nextcloud-modern — fix-permissions.sh",
+      "initialClass": "dev.zed.Zed",
+      "initialTitle": "empty project",
+      "pid": 5468,
+      "xwayland": false,
+      "pinned": false,
+      "fullscreen": 0,
+      "fullscreenClient": 0,
+      "grouped": [],
+      "tags": [],
+      "swallowing": "0x0",
+      "focusHistoryID": 2,
+      "inhibitingIdle": false,
+      "xdgTag": "",
+      "xdgDescription": ""
+    },
+    {
+      "address": "0x55e49c746c40",
+      "mapped": true,
+      "hidden": false,
+      "at": [15, 78],
+      "size": [2530, 1507],
+      "workspace": {
+        "id": 2,
+        "name": "2"
+      },
+      "floating": false,
+      "pseudo": false,
+      "monitor": 0,
+      "class": "pamac-manager",
+      "title": "Updates",
+      "initialClass": "pamac-manager",
+      "initialTitle": "Add/Remove Software",
+      "pid": 38238,
+      "xwayland": true,
+      "pinned": false,
+      "fullscreen": 0,
+      "fullscreenClient": 0,
+      "grouped": [],
+      "tags": [],
+      "swallowing": "0x0",
+      "focusHistoryID": 1,
+      "inhibitingIdle": false,
+      "xdgTag": "",
+      "xdgDescription": ""
+    },
+    {
+      "address": "0x55e49c5e2850",
+      "mapped": true,
+      "hidden": false,
+      "at": [15, 78],
+      "size": [2530, 1507],
+      "workspace": {
+        "id": 3,
+        "name": "3"
+      },
+      "floating": false,
+      "pseudo": false,
+      "monitor": 0,
+      "class": "dev.zed.Zed",
+      "title": "autostart, eww, hypr, nvim, swaync, user, uwsm, waybar, wezterm, stepheybar, stephey.dev — keybinds.conf",
+      "initialClass": "dev.zed.Zed",
+      "initialTitle": "empty project",
+      "pid": 5468,
+      "xwayland": false,
+      "pinned": false,
+      "fullscreen": 0,
+      "fullscreenClient": 0,
+      "grouped": [],
+      "tags": [],
+      "swallowing": "0x0",
+      "focusHistoryID": 0,
+      "inhibitingIdle": false,
+      "xdgTag": "",
+      "xdgDescription": ""
+    }
+  ],
+  "workspaces": [
+    {
+      "id": 1,
+      "name": "1",
+      "monitor": "eDP-2",
+      "monitorID": 0,
+      "windows": 1,
+      "hasfullscreen": false,
+      "lastwindow": "0x55e49c5e8d70",
+      "lastwindowtitle": "nextcloud-modern — fix-permissions.sh",
+      "ispersistent": false
+    },
+    {
+      "id": 2,
+      "name": "2",
+      "monitor": "eDP-2",
+      "monitorID": 0,
+      "windows": 1,
+      "hasfullscreen": false,
+      "lastwindow": "0x55e49c746c40",
+      "lastwindowtitle": "Updates",
+      "ispersistent": false
+    },
+    {
+      "id": 3,
+      "name": "3",
+      "monitor": "eDP-2",
+      "monitorID": 0,
+      "windows": 1,
+      "hasfullscreen": false,
+      "lastwindow": "0x55e49c5e2850",
+      "lastwindowtitle": "autostart, eww, hypr, nvim, swaync, user, uwsm, waybar, wezterm, stepheybar, stephey.dev — keybinds.conf",
+      "ispersistent": false
+    }
+  ]
+}
