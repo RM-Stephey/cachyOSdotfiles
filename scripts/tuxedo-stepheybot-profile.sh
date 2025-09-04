@@ -1,0 +1,327 @@
+#!/bin/bash
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+# ┃              StepheyBot Optimized Performance Profile       ┃
+# ┃                TUXEDO Stellaris 17 Intel Gen6              ┃
+# ┃              i9-14900HX + RTX 4090 Configuration           ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+# Colors for neon-themed output
+NEON_PINK='\033[95m'
+NEON_BLUE='\033[96m'
+NEON_GREEN='\033[92m'
+NEON_PURPLE='\033[94m'
+NC='\033[0m' # No Color
+
+# Configuration for Stellaris 17
+PROFILE_NAME="StepheyBot High Performance"
+LOG_FILE="/tmp/stepheybot-performance.log"
+
+# Thermal limits (°C) - Conservative for sustained performance
+CPU_TEMP_TARGET=75
+CPU_TEMP_MAX=85
+FAN_MIN_SPEED=35
+FAN_AGGRESSIVE_TEMP=70
+
+log_message() {
+    echo -e "${NEON_BLUE}[$(date '+%H:%M:%S')]${NC} $1" | tee -a "$LOG_FILE"
+}
+
+check_hardware() {
+    local product_name=$(sudo dmidecode -s system-product-name 2>/dev/null)
+    if [[ "$product_name" != *"TUXEDO Stellaris 17"* ]]; then
+        echo -e "${NEON_PINK}⚠️  Warning: Not running on TUXEDO Stellaris 17${NC}"
+        return 1
+    fi
+
+    local cpu_model=$(lscpu | grep "Model name" | awk -F: '{print $2}' | xargs)
+    if [[ "$cpu_model" != *"i9-14900HX"* ]]; then
+        echo -e "${NEON_PURPLE}⚠️  Warning: CPU model differs from expected i9-14900HX${NC}"
+    fi
+
+    return 0
+}
+
+set_cpu_performance() {
+    log_message "🔧 Setting CPU performance profile..."
+
+    # Set scaling governor to balance performance and efficiency
+    # "performance" would max out clocks, "ondemand" is more balanced
+    for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
+        if [ -w "$cpu" ]; then
+            echo "ondemand" | sudo tee "$cpu" >/dev/null 2>&1
+        fi
+    done
+
+    # Energy performance preference: balance_performance
+    # This gives good performance without constant max clocks
+    for cpu in /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference; do
+        if [ -w "$cpu" ]; then
+            echo "balance_performance" | sudo tee "$cpu" >/dev/null 2>&1
+        fi
+    done
+
+    # Set scaling frequencies for responsive but not wasteful performance
+    # Min: 2.0 GHz (higher than base 800MHz for snappy response)
+    # Max: 5.4 GHz (slightly below turbo max for thermal management)
+    for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_min_freq; do
+        if [ -w "$cpu" ]; then
+            echo "2000000" | sudo tee "$cpu" >/dev/null 2>&1
+        fi
+    done
+
+    for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq; do
+        if [ -w "$cpu" ]; then
+            echo "5400000" | sudo tee "$cpu" >/dev/null 2>&1
+        fi
+    done
+
+    log_message "✅ CPU performance profile applied"
+}
+
+set_gpu_performance() {
+    log_message "🎮 Configuring RTX 4090 power management..."
+
+    # Set NVIDIA power management to prefer performance over max power savings
+    if command -v nvidia-settings >/dev/null 2>&1; then
+        # Set power mizer to prefer performance (not max performance to avoid heat)
+        nvidia-settings -a '[gpu:0]/GpuPowerMizerMode=1' >/dev/null 2>&1
+
+        # Set memory transfer rate to application controlled
+        nvidia-settings -a '[gpu:0]/GPUMemoryTransferRateOffset[3]=0' >/dev/null 2>&1
+
+        log_message "✅ NVIDIA settings applied"
+    fi
+
+    # NVIDIA driver power management
+    if [ -d "/sys/bus/pci/drivers/nvidia" ]; then
+        # Set power management to auto (allows dynamic clocking)
+        echo auto | sudo tee /sys/bus/pci/drivers/nvidia/*/power/control >/dev/null 2>&1
+
+        # Runtime PM - allows GPU to downclock when idle
+        echo auto | sudo tee /sys/bus/pci/devices/0000:01:00.0/power/control >/dev/null 2>&1
+    fi
+}
+
+optimize_system_responsiveness() {
+    log_message "⚡ Optimizing system responsiveness..."
+
+    # VM swappiness - reduce swap usage for snappier performance
+    echo 10 | sudo tee /proc/sys/vm/swappiness >/dev/null 2>&1
+
+    # VM dirty ratios - flush data more frequently for consistent performance
+    echo 5 | sudo tee /proc/sys/vm/dirty_ratio >/dev/null 2>&1
+    echo 2 | sudo tee /proc/sys/vm/dirty_background_ratio >/dev/null 2>&1
+
+    # Network performance tuning
+    echo 'net.core.netdev_max_backlog = 5000' | sudo tee -a /etc/sysctl.d/99-stepheybot-net.conf >/dev/null 2>&1
+    echo 'net.core.rmem_max = 134217728' | sudo tee -a /etc/sysctl.d/99-stepheybot-net.conf >/dev/null 2>&1
+    echo 'net.core.wmem_max = 134217728' | sudo tee -a /etc/sysctl.d/99-stepheybot-net.conf >/dev/null 2>&1
+
+    # Apply network settings
+    sudo sysctl -p /etc/sysctl.d/99-stepheybot-net.conf >/dev/null 2>&1
+
+    log_message "✅ System responsiveness optimized"
+}
+
+set_thermal_management() {
+    log_message "🌡️  Configuring thermal management..."
+
+    # Set Intel P-State driver preferences if available
+    if [ -f /sys/devices/system/cpu/intel_pstate/max_perf_pct ]; then
+        # Limit max performance to 90% to avoid thermal throttling
+        echo 90 | sudo tee /sys/devices/system/cpu/intel_pstate/max_perf_pct >/dev/null 2>&1
+        echo 20 | sudo tee /sys/devices/system/cpu/intel_pstate/min_perf_pct >/dev/null 2>&1
+        log_message "📊 Intel P-State limits set (20%-90%)"
+    fi
+
+    # Thermal zone configuration
+    for thermal_zone in /sys/class/thermal/thermal_zone*/policy; do
+        if [ -w "$thermal_zone" ] && [ -f "$thermal_zone" ]; then
+            # Use step_wise for gradual thermal response
+            echo "step_wise" | sudo tee "$thermal_zone" >/dev/null 2>&1
+        fi
+    done
+
+    log_message "✅ Thermal management configured"
+}
+
+monitor_temperatures() {
+    local cpu_temp=$(sensors | grep "Package id 0" | awk '{print $4}' | tr -d '+°C')
+    if [ -n "$cpu_temp" ]; then
+        log_message "🌡️  CPU Package: ${cpu_temp}°C"
+
+        # Dynamic adjustment based on temperature
+        if (( $(echo "$cpu_temp > $CPU_TEMP_MAX" | bc -l) )); then
+            log_message "🔥 High temperature detected, reducing performance"
+            # Temporarily reduce max frequency by 10%
+            for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq; do
+                if [ -w "$cpu" ]; then
+                    echo "4800000" | sudo tee "$cpu" >/dev/null 2>&1
+                fi
+            done
+        elif (( $(echo "$cpu_temp < $CPU_TEMP_TARGET" | bc -l) )); then
+            # Temperature is good, restore full performance
+            for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq; do
+                if [ -w "$cpu" ]; then
+                    echo "5400000" | sudo tee "$cpu" >/dev/null 2>&1
+                fi
+            done
+        fi
+    fi
+}
+
+optimize_electron_apps() {
+    log_message "⚛️  Optimizing for Electron apps (Cursor, etc.)..."
+
+    # Create optimized environment for Electron applications
+    mkdir -p ~/.config/environment.d/
+    cat > ~/.config/environment.d/99-stepheybot-electron.conf << 'EOF'
+# StepheyBot Electron Optimizations
+ELECTRON_DISABLE_SANDBOX=0
+ELECTRON_OZONE_PLATFORM_HINT=wayland
+ELECTRON_USE_GL=angle
+ELECTRON_ANGLE_BACKEND=vulkan
+NODE_OPTIONS=--max-old-space-size=8192
+UV_THREADPOOL_SIZE=16
+MALLOC_ARENA_MAX=2
+EOF
+
+    log_message "✅ Electron optimizations applied"
+}
+
+create_monitor_service() {
+    log_message "📊 Setting up performance monitoring..."
+
+    # Create systemd user service for continuous monitoring
+    mkdir -p ~/.config/systemd/user/
+    cat > ~/.config/systemd/user/stepheybot-thermal-monitor.service << 'EOF'
+[Unit]
+Description=StepheyBot Thermal Monitor
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/home/stephey/.config/hypr/scripts/tuxedo-stepheybot-profile.sh --monitor
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=default.target
+EOF
+
+    cat > ~/.config/systemd/user/stepheybot-thermal-monitor.timer << 'EOF'
+[Unit]
+Description=StepheyBot Thermal Monitor Timer
+Requires=stepheybot-thermal-monitor.service
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=2min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
+
+    systemctl --user daemon-reload
+    systemctl --user enable stepheybot-thermal-monitor.timer >/dev/null 2>&1
+
+    log_message "✅ Monitoring service created"
+}
+
+show_status() {
+    echo -e "${NEON_PINK}📋 StepheyBot Performance Profile Status${NC}"
+    echo -e "${NEON_BLUE}════════════════════════════════════════${NC}"
+
+    # CPU Info
+    local cpu_gov=$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 2>/dev/null)
+    local cpu_epp=$(cat /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference 2>/dev/null)
+    local cpu_freq=$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq 2>/dev/null)
+    cpu_freq=$((cpu_freq / 1000))
+
+    echo -e "${NEON_GREEN}CPU Governor:${NC} $cpu_gov"
+    echo -e "${NEON_GREEN}Energy Preference:${NC} $cpu_epp"
+    echo -e "${NEON_GREEN}Current Frequency:${NC} ${cpu_freq} MHz"
+
+    # Temperature
+    local cpu_temp=$(sensors 2>/dev/null | grep "Package id 0" | awk '{print $4}' | tr -d '+°C')
+    if [ -n "$cpu_temp" ]; then
+        echo -e "${NEON_GREEN}CPU Temperature:${NC} ${cpu_temp}°C"
+    fi
+
+    # Memory
+    local mem_info=$(free -h | awk '/^Mem:/ {print $3 "/" $2}')
+    echo -e "${NEON_GREEN}Memory Usage:${NC} $mem_info"
+
+    echo -e "${NEON_BLUE}════════════════════════════════════════${NC}"
+}
+
+# Main execution logic
+case "${1:-apply}" in
+    "apply"|"")
+        echo -e "${NEON_PINK}🚀 StepheyBot Performance Profile for Stellaris 17${NC}"
+        check_hardware || echo -e "${NEON_PURPLE}Continuing anyway...${NC}"
+
+        set_cpu_performance
+        set_gpu_performance
+        optimize_system_responsiveness
+        set_thermal_management
+        optimize_electron_apps
+        create_monitor_service
+
+        echo -e "${NEON_GREEN}🎉 StepheyBot profile applied successfully!${NC}"
+        show_status
+        ;;
+
+    "monitor")
+        monitor_temperatures
+        ;;
+
+    "status")
+        show_status
+        ;;
+
+    "reset")
+        log_message "🔄 Resetting to default settings..."
+        # Reset CPU governor to powersave (TCC default)
+        for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
+            if [ -w "$cpu" ]; then
+                echo "powersave" | sudo tee "$cpu" >/dev/null 2>&1
+            fi
+        done
+
+        # Reset energy performance preference
+        for cpu in /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference; do
+            if [ -w "$cpu" ]; then
+                echo "balance_power" | sudo tee "$cpu" >/dev/null 2>&1
+            fi
+        done
+
+        systemctl --user stop stepheybot-thermal-monitor.timer >/dev/null 2>&1
+        systemctl --user disable stepheybot-thermal-monitor.timer >/dev/null 2>&1
+
+        echo -e "${NEON_GREEN}✅ Settings reset to defaults${NC}"
+        ;;
+
+    "help"|"-h"|"--help")
+        echo "StepheyBot Performance Profile for TUXEDO Stellaris 17"
+        echo ""
+        echo "Usage: $0 [command]"
+        echo ""
+        echo "Commands:"
+        echo "  apply     Apply the StepheyBot performance profile (default)"
+        echo "  monitor   Monitor temperatures and adjust dynamically"
+        echo "  status    Show current performance status"
+        echo "  reset     Reset to default settings"
+        echo "  help      Show this help message"
+        echo ""
+        echo "This profile balances high performance with thermal management"
+        echo "for optimal Cursor/development workflow without jet engine noise."
+        ;;
+
+    *)
+        echo -e "${NEON_PINK}Unknown command: $1${NC}"
+        echo "Use '$0 help' for available commands"
+        exit 1
+        ;;
+esac
