@@ -201,7 +201,7 @@ After=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=/home/stephey/.config/hypr/scripts/tuxedo-stepheybot-profile.sh --monitor
+ExecStart=/home/stephey/.config/hypr/scripts/tuxedo-stepheybot-profile.sh monitor
 Restart=always
 RestartSec=30
 

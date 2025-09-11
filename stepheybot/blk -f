@@ -1,0 +1,150 @@
+Sep 08 23:35:28 b16br0th3r kernel: [0;1;31m[0;1;39m[0;1;31musbhid 1-7:1.0: couldn't find an input interrupt endpoint[0m
+Sep 08 23:35:28 b16br0th3r kernel: [0;1;31m[0;1;39m[0;1;31musbhid 1-8:1.0: couldn't find an input interrupt endpoint[0m
+Sep 08 23:35:28 b16br0th3r systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start Remount Root and Kernel File Systems.[0m
+Sep 08 23:35:28 b16br0th3r systemd-remount-fs[819]: [0;1;31m[0;1;39m[0;1;31m/usr/bin/mount for / exited with exit status 32.[0m
+Sep 08 23:35:29 b16br0th3r kernel: [0;1;31m[0;1;39m[0;1;31mproc_thermal_pci 0000:00:04.0: error: proc_thermal_add, will continue[0m
+Sep 08 23:35:29 b16br0th3r systemd-remount-fs[1196]: [0;1;31m[0;1;39m[0;1;31m/usr/bin/mount for / exited with exit status 32.[0m
+Sep 08 23:35:29 b16br0th3r systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start Remount Root and Kernel File Systems.[0m
+Sep 08 23:35:29 b16br0th3r systemd-remount-fs[1237]: [0;1;31m[0;1;39m[0;1;31m/usr/bin/mount for / exited with exit status 32.[0m
+Sep 08 23:35:29 b16br0th3r systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start Remount Root and Kernel File Systems.[0m
+Sep 08 23:35:29 b16br0th3r systemd-remount-fs[1361]: [0;1;31m[0;1;39m[0;1;31m/usr/bin/mount for / exited with exit status 32.[0m
+Sep 08 23:35:29 b16br0th3r systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start Remount Root and Kernel File Systems.[0m
+Sep 08 23:35:37 b16br0th3r kernel: 
+Sep 08 23:35:37 b16br0th3r kernel: [0;1;31m[0;1;39m[0;1;31mNVRM: loading NVIDIA UNIX x86_64 Kernel Module  580.82.07  Wed Aug 27 18:39:48 UTC 2025[0m
+Sep 08 23:35:37 b16br0th3r eruption[2324]: [0;1;31m[0;1;39m[0;1;31mLua error in file /usr/share/eruption/scripts/animal.lua: callback error[0m
+                                           [0;1;31mstack traceback:[0m
+                                           [0;1;31m        [C]: in function 'animal_create'[0m
+                                           [0;1;31m        [string "eruption/src/scripting/script.rs:250:40"]:28: in main chunk[0m
+                                           [0;1;31mcaused by: runtime error: Could not instantiate the animal object: Lost connection to device[0m
+                                           [0;1;31m        UnknownError[0m
+Sep 08 23:35:37 b16br0th3r eruption[2324]: [0;1;31m[0;1;39m[0;1;31mScript execution failed[0m
+Sep 08 23:35:38 b16br0th3r systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start MCP HTTP Server.[0m
+Sep 08 23:35:38 b16br0th3r systemd-vconsole-setup[5503]: [0;1;31m[0;1;39m[0;1;31m/usr/bin/setfont failed with exit status 66.[0m
+Sep 08 23:35:38 b16br0th3r systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start Virtual Console Setup.[0m
+Sep 08 23:35:39 b16br0th3r sddm-helper[5548]: [0;1;31m[0;1;39m[0;1;31mgkr-pam: couldn't unlock the login keyring.[0m
+Sep 08 23:35:40 b16br0th3r systemctl[5653]: [0;1;31m[0;1;39m[0;1;31mNot a valid environment variable name: XDG_CURRENT_DESKTOP=Hyprland[0m
+Sep 08 23:35:40 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start Preload services for Hyprland session.[0m
+Sep 08 23:35:40 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:35:40 b16br0th3r (yring.sh)[5735]: [0;1;31m[0;1;39m[0;1;31munlock-keyring.service: Failed at step EXEC spawning /home/stephey/.config/user/unlock-keyring.sh: No such file or directory[0m
+Sep 08 23:35:40 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start Unlock GNOME Keyring at session start.[0m
+Sep 08 23:35:40 b16br0th3r systemd-coredump[5794]: ]8;;man:core(5)\[🡕]]8;;\ [0;1;31m[0;1;39m[0;1;31mProcess 5738 (1password) of user 1000 terminated abnormally without generating a coredump.[0m
+Sep 08 23:35:41 b16br0th3r kunifiedpush-distributor[7162]: [0;1;31m[0;1;39m[0;1;31morg.kde.kunifiedpush.distributor: Distributor service name already in use - aborting![0m
+Sep 08 23:35:41 b16br0th3r kunifiedpush-distributor[7614]: [0;1;31m[0;1;39m[0;1;31morg.kde.kunifiedpush.distributor: Distributor service name already in use - aborting![0m
+Sep 08 23:35:41 b16br0th3r kunifiedpush-distributor[7815]: [0;1;31m[0;1;39m[0;1;31morg.kde.kunifiedpush.distributor: Distributor service name already in use - aborting![0m
+Sep 08 23:35:42 b16br0th3r kunifiedpush-distributor[8088]: [0;1;31m[0;1;39m[0;1;31morg.kde.kunifiedpush.distributor: Distributor service name already in use - aborting![0m
+Sep 08 23:35:42 b16br0th3r kunifiedpush-distributor[8360]: [0;1;31m[0;1;39m[0;1;31morg.kde.kunifiedpush.distributor: Distributor service name already in use - aborting![0m
+Sep 08 23:35:42 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start Launch the Arch-Update systray applet.[0m
+Sep 08 23:35:42 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start KUnifiedPush Distributor.[0m
+Sep 08 23:35:43 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start Swaync notification daemon.[0m
+Sep 08 23:35:43 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:35:43 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start Swaync notification daemon.[0m
+Sep 08 23:35:44 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start Swaync notification daemon.[0m
+Sep 08 23:35:45 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start Swaync notification daemon.[0m
+Sep 08 23:35:45 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start Swaync notification daemon.[0m
+Sep 08 23:35:46 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:35:49 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:35:52 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:35:56 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:35:59 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:02 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:05 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:08 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:11 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:15 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:18 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:21 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:24 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:28 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:31 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:34 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:37 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:41 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:44 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:47 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:50 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:54 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:36:57 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:00 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:03 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:07 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:10 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:13 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:16 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:20 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:23 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:26 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:29 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:33 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:36 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:39 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:42 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:46 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:49 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:52 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:55 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:37:59 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:02 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:05 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:08 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:12 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:15 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:18 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:21 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:25 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:28 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:31 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:34 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:38 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:41 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:44 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:47 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:51 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:54 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:38:57 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:00 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:04 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:07 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:10 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:13 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:17 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:20 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:23 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:26 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:30 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:33 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:36 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:39 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:43 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:46 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:49 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:52 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:55 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:39:59 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:02 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:05 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:08 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:12 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:15 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:18 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:21 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:25 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:28 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:31 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:34 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:38 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:41 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:44 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:47 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:50 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:54 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:40:57 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:41:00 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:41:03 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:41:07 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:41:10 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:41:13 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:41:16 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:41:20 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:41:23 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:41:26 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
+Sep 08 23:41:29 b16br0th3r systemd[5553]: [0;1;31m[0;1;39m[0;1;31mFailed to start GNOME PolicyKit Authentication Agent.[0m
