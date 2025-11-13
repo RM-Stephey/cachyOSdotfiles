@@ -10,7 +10,7 @@ env = GBM_BACKEND,nvidia-drm
 
 # RTX 4090 Performance Optimizations
 env = __GL_GSYNC_ALLOWED,1
-env = __GL_VRR_ALLOWED,0
+env = __GL_VRR_ALLOWED,1
 env = WLR_DRM_NO_ATOMIC,1
 env = __GL_MaxFramesAllowed,1
 env = __GL_THREADED_OPTIMIZATIONS,1

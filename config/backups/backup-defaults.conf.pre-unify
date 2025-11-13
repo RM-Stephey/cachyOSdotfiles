@@ -1,0 +1,35 @@
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+# ┃                     Defaults Configuration                  ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+$filemanager = pcmanfm-qt
+$applauncher = ulauncher toggle
+$terminal = kitty
+$browser = floorp
+$idlehandler = swayidle -w \
+    timeout 180 'brightnessctl -s set 50%' resume 'brightnessctl -s set 100%' \
+    timeout 300 'brightnessctl -s set 0%' resume 'brightnessctl -s set 100%' \
+    before-sleep '~/.config/hypr/scripts/swaylock.sh' \
+    lock '~/.config/hypr/scripts/swaylock.sh'
+$capturing = /home/stephey/.config/hypr/scripts/screenshots/screenshot-freeze.sh
+
+
+
+# RTX 4090 Optimized Environment Variables
+env = LIBVA_DRIVER_NAME,nvidia
+env = XDG_SESSION_TYPE,wayland
+env = GBM_BACKEND,nvidia-drm
+env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+env = WLR_NO_HARDWARE_CURSORS,1
+env = __GL_GSYNC_ALLOWED,1
+env = __GL_VRR_ALLOWED,1
+env = __GL_SYNC_DISPLAY_DEVICE,eDP-1
+env = __GL_SYNC_TO_VBLANK,1
+env = __GL_THREADED_OPTIMIZATIONS,1
+env = __GL_YIELD,USLEEP
+env = NVIDIA_PRESERVE_VIDEO_MEMORY_ALLOCATIONS,1
+env = NVD_BACKEND,direct
+env = WLR_RENDERER_ALLOW_SOFTWARE,0
+env = XCURSOR_SIZE,24
+env = HYPRCURSOR_SIZE,24
+env = ELECTRON_OZONE_PLATFORM_HINT,auto

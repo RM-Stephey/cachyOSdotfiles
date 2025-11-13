@@ -5,12 +5,5 @@ plugins = ["scratchpads"]
 animation = "fromRight"
 command = "kitty --class term_kitty"
 class = "term_kitty"
-focus_on_visible = false
-lazy = true
-
-[scratchpads.term_wezterm]
-animation = "fromTop"
-command = "wezterm start --always-new-process --class wezterm_scratch"
-class = "wezterm_scratch"
 focus_on_visible = true
-lazy = false
+lazy = true

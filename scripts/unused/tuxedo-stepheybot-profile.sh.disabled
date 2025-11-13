@@ -146,7 +146,7 @@ set_thermal_management() {
 }
 
 monitor_temperatures() {
-    local cpu_temp=$(sensors | grep "Package id 0" | awk '{print $4}' | tr -d '+°C')
+    local cpu_temp=$(sensors 2>/dev/null | grep "Package id 0" | awk '{print $4}' | tr -d '+°C')
     if [ -n "$cpu_temp" ]; then
         log_message "🌡️  CPU Package: ${cpu_temp}°C"
 
@@ -244,7 +244,7 @@ show_status() {
     echo -e "${NEON_GREEN}Current Frequency:${NC} ${cpu_freq} MHz"
 
     # Temperature
-    local cpu_temp=$(sensors 2>/dev/null | grep "Package id 0" | awk '{print $4}' | tr -d '+°C')
+    local cpu_temp=$(sensors 2>/dev/null | grep "Package id 0" 2>/dev/null | awk '{print $4}' | tr -d '+°C')
     if [ -n "$cpu_temp" ]; then
         echo -e "${NEON_GREEN}CPU Temperature:${NC} ${cpu_temp}°C"
     fi

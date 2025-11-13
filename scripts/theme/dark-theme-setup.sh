@@ -16,8 +16,7 @@ gsettings set org.gnome.desktop.interface font-name 'Cantarell 11'
 # Export environment variables for dark theme
 export GTK_THEME="oomox-cyberpunk-neon"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc"
-export QT_STYLE_OVERRIDE="kvantum-dark"
-export QT_QPA_PLATFORMTHEME="qt5ct"
+export QT_QPA_PLATFORMTHEME="hyprqt6engine"
 
 # Create GTK-2.0 dark theme config
 mkdir -p ~/.config/gtk-2.0
@@ -73,9 +72,9 @@ gtk-cursor-theme-size=24
 gtk-application-prefer-dark-theme=1
 EOF
 
-# Set Qt5 dark theme via qt5ct
-if [ -f ~/.config/qt5ct/qt5ct.conf ]; then
-    sed -i 's/^style=.*/style=kvantum-dark/' ~/.config/qt5ct/qt5ct.conf
+# Set Qt5 dark theme via qt6ct
+if [ -f ~/.config/qt6ct/qt6ct.conf ]; then
+    sed -i 's/^style=.*/style=kvantum-dark/' ~/.config/qt6ct/qt6ct.conf
 fi
 
 # Set Qt6 dark theme via qt6ct
@@ -118,8 +117,7 @@ cat > ~/.config/environment.d/50-dark-theme.conf << EOF
 # Dark theme environment variables
 GTK_THEME=oomox-cyberpunk-neon
 GTK2_RC_FILES=$HOME/.config/gtk-2.0/gtkrc
-QT_STYLE_OVERRIDE=kvantum-dark
-QT_QPA_PLATFORMTHEME=qt5ct
+QT_QPA_PLATFORMTHEME=hyprqt6engine
 GTK_USE_DARK_THEME=1
 ELECTRON_FORCE_DARK_MODE=1
 EOF
@@ -159,7 +157,7 @@ if command -v flatpak >/dev/null 2>&1; then
 fi
 
 # Notify systemd of environment changes
-systemctl --user import-environment GTK_THEME QT_STYLE_OVERRIDE GTK_USE_DARK_THEME
+systemctl --user import-environment GTK_THEME GTK_USE_DARK_THEME
 
 echo "Dark theme setup complete!"
 echo "Some applications may need to be restarted to apply the theme."

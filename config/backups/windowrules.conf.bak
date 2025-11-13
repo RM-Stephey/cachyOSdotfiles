@@ -6,22 +6,15 @@
 # https://wiki.hyprland.org/Configuring/Window-Rules/
 
 # -------------------------------------------------------------
-# Layer Rules (for Waybar, Quickshell bar, notifications, etc.)
+# Layer Rules (for Waybar, notifications, etc.)
 # -------------------------------------------------------------
 layerrule = blur, waybar
 layerrule = ignorezero, waybar
 layerrule = animation slide down, waybar
-layerrule = noanim, ^(term_kitty)$ # No animation for scratchpad toggle
+layerrule = noanim, ^(term_kitty|wezterm_scratch)$ # No animation for scratchpad toggle
 
 # Waybar auto-hide in fullscreen mode with slide animation
 layerrule = animation slide, waybar
-
-# Quickshell Waybar (panel) blur & behavior rules (mirrors Waybar)
-layerrule = blur, quickshell:waybar
-layerrule = ignorezero, quickshell:waybar
-layerrule = animation slide down, quickshell:waybar
-layerrule = animation slide, quickshell:waybar
-layerrule = ignorealpha 0.5, quickshell:waybar
 # layerrule = dimaround, waybar  # Removed - was causing dimming
 
 # Add blur to swaync for glass effect
@@ -41,6 +34,7 @@ windowrule = bordersize 4, floating:0
 # Keep borders on all tiled windows for better definition
 
 # Maximized windows - keep borders and shadows for better visibility
+# windowrulev2 = noborder, fullscreen:1  # Keep borders for better window definition
 windowrulev2 = rounding 8, fullscreen:1  # Reduced rounding for maximized windows
 # windowrulev2 = noshadow, fullscreen:1  # Keep shadows for depth perception
 
@@ -53,7 +47,8 @@ windowrulev2 = immediate, fullscreen:0
 # windowrulev2 = opacity 0.98, fullscreen:0  # Removed - causing dim issues
 windowrulev2 = noshadow, fullscreen:0
 windowrulev2 = noanim, fullscreen:0
-windowrulev2 = rounding 1, fullscreen:0
+windowrulev2 = noborder, fullscreen:0  # Remove borders on true fullscreen for performance
+windowrulev2 = rounding 0, fullscreen:0
 
 # Separate rules for maximized (fullscreen:1) vs true fullscreen (fullscreen:0)
 # fullscreen:0 = true fullscreen, fullscreen:1 = maximize
@@ -61,10 +56,12 @@ windowrulev2 = immediate, fullscreen:1
 # blur is controlled globally in decorations.conf, not per-window
 # windowrulev2 = opacity 0.98, fullscreen:1  # Removed - causing dim issues
 
+# Gaming applications optimization - keep noborder for performance
 windowrulev2 = immediate, class:^(steam_app_)(.*)$
 windowrulev2 = noblur, class:^(steam_app_)(.*)$
 windowrulev2 = noshadow, class:^(steam_app_)(.*)$
 windowrulev2 = noanim, class:^(steam_app_)(.*)$
+windowrulev2 = noborder, class:^(steam_app_)(.*)$
 
 # Video and media applications
 windowrulev2 = immediate, class:^(mpv|vlc)$
@@ -79,7 +76,7 @@ windowrulev2 = noshadow, title:^(.*(YouTube|Netflix|Twitch|Prime Video).*)$
 # -------------------------------------------------------------
 # Floating Dialogs & Popups
 # -------------------------------------------------------------
-windowrule = float, class:^(pavucontrol-qt)$
+windowrule = float, class:^(org.pulseaudio.pavucontrol)$
 windowrule = float, class:^(blueman-manager)$
 windowrule = float, class:^(CachyOSHello)$
 windowrule = float, class:^(zenity)$
@@ -104,7 +101,17 @@ windowrulev2 = bordercolor $neon_purple $neon_blue 45deg, class:^(org.wezfurlong
 windowrulev2 = opacity 1.0 0.98, class:^(org.wezfurlong.wezterm)$ # Active/inactive opacity
 windowrulev2 = animation slide, class:^(org.wezfurlong.wezterm)$
 
-# --- Scratchpad (Kitty) ---
+# --- Scratchpads (Wezterm Primary, Kitty Secondary) ---
+# Wezterm - Primary terminal with enhanced neon theme
+windowrulev2 = float, class:^(wezterm_scratch)$
+windowrulev2 = center, class:^(wezterm_scratch)$
+windowrulev2 = size 80% 70%, class:^(wezterm_scratch)$
+windowrulev2 = bordercolor $neon_pink $neon_blue 45deg, class:^(wezterm_scratch)$
+windowrulev2 = animation slide, class:^(wezterm_scratch)$
+windowrulev2 = rounding 12, class:^(wezterm_scratch)$
+windowrulev2 = opacity 1.0 0.98, class:^(wezterm_scratch)$
+
+# Kitty - Secondary terminal
 windowrulev2 = float, class:^(term_kitty)$
 windowrulev2 = center, class:^(term_kitty)$
 windowrulev2 = size 70% 55%, class:^(term_kitty)$
@@ -114,16 +121,16 @@ windowrulev2 = rounding 16, class:^(term_kitty)$
 windowrulev2 = opacity 1.0 0.98, class:^(term_kitty)$
 
 # --- File Manager (Thunar) ---
-windowrulev2 = float, class:^(pcmanfm-qt)$
-windowrulev2 = size 65% 75%, class:^(pcmanfm-qt)$
-windowrulev2 = center, class:^(pcmanfm-qt)$
-windowrulev2 = bordercolor $neon_blue $neon_green 45deg, class:^(pcmanfm-qt)$
-windowrulev2 = opacity 1.0 0.98, class:^(pcmanfm-qt)$
-windowrulev2 = animation windowsIn, class:^(pcmanfm-qt)$
-windowrulev2 = rounding 8, class:^(pcmanfm-qt)$
+windowrulev2 = float, class:^(thunar)$
+windowrulev2 = size 65% 75%, class:^(thunar)$
+windowrulev2 = center, class:^(thunar)$
+windowrulev2 = bordercolor $neon_blue $neon_green 45deg, class:^(thunar)$
+windowrulev2 = opacity 1.0 0.98, class:^(thunar)$
+windowrulev2 = animation windowsIn, class:^(thunar)$
+windowrulev2 = rounding 8, class:^(thunar)$
 # Thunar dialogs
 windowrulev2 = float, title:^(File Operation Progress)$
-windowrulev2 = float, title:^(Confirm.*)$, class:^(pcmanfm-qt)$
+windowrulev2 = float, title:^(Confirm.*)$, class:^(thunar)$
 
 # --- Other Apps ---
 # Beeper
@@ -143,7 +150,6 @@ windowrulev2 = rounding 16, title:^(Beeper Notification)$
 # Ulauncher
 windowrulev2 = float, class:^(ulauncher)$
 windowrulev2 = stayfocused, class:^(ulauncher)$
-windowrulev2 = focusonactivate, class:^(ulauncher)$
 windowrulev2 = pin, class:^(ulauncher)$
 # windowrulev2 = dimaround, class:^(ulauncher)$  # Removed - was causing dimming
 windowrulev2 = noshadow, class:^(ulauncher)$
@@ -198,21 +204,14 @@ layerrule = ignorealpha 0.5, swaync-control-center
 layerrule = ignorealpha 0.5, swaync-notification-window
 
 # Enhanced pavucontrol rules with borders
-windowrule = float, class:^(pavucontrol-qt)$
-windowrule = size 900 600, class:^(pavucontrol-qt)$
-windowrule = center, class:^(pavucontrol-qt)$
-windowrule = rounding 12, class:^(pavucontrol-qt)$
-windowrule = bordersize 3, class:^(pavucontrol-qt)$
-windowrule = opacity 0.95 0.90, class:^(pavucontrol-qt)$
+windowrule = float, class:^(org.pulseaudio.pavucontrol)$
+windowrule = size 900 600, class:^(org.pulseaudio.pavucontrol)$
+windowrule = center, class:^(org.pulseaudio.pavucontrol)$
+windowrule = rounding 12, class:^(org.pulseaudio.pavucontrol)$
+windowrule = bordersize 3, class:^(org.pulseaudio.pavucontrol)$
+windowrule = opacity 0.95 0.90, class:^(org.pulseaudio.pavucontrol)$
 
 # Glass-like blur effect for pavucontrol
-windowrulev2 = opacity 0.88 0.85, class:^(pavucontrol-qt)$
-windowrulev2 = animation slide, class:^(pavucontrol-qt)$
-layerrule = blur, pavucontrol-qt
-
-# Screenshot selection rules - prevent windows from hiding
-windowrulev2 = nofocus, class:^(slurp)$
-windowrulev2 = float, class:^(slurp)$
-windowrulev2 = pin, class:^(slurp)$
-windowrulev2 = stayfocused, class:^(slurp)$
-layerrule = noanim, selection
+windowrulev2 = opacity 0.88 0.85, class:^(org.pulseaudio.pavucontrol)$
+windowrulev2 = animation slide, class:^(org.pulseaudio.pavucontrol)$
+layerrule = blur, pavucontrol

@@ -131,7 +131,7 @@ launch_cursor() {
     echo -e "${NEON_GREEN}🎯 Launching Cursor with optimizations...${NC}"
 
     # Launch in background to avoid blocking
-    nohup /usr/bin/cursor "${cursor_args[@]}" "$@" > /tmp/cursor-startup.log 2>&1 &
+    nohup cursor "${cursor_args[@]}" "$@" > /tmp/cursor-startup.log 2>&1 &
     local cursor_pid=$!
 
     echo -e "${NEON_BLUE}📝 Cursor launched (PID: $cursor_pid)${NC}"
