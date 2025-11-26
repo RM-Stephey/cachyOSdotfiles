@@ -34,10 +34,12 @@ export WLR_RENDERER_ALLOW_SOFTWARE=0
 export __GL_YIELD=USLEEP
 export MOZ_ENABLE_WAYLAND=1
 
-# Cursor settings
-export HYPRCURSOR_SIZE=24
-export XCURSOR_SIZE=24
-export QT_CURSOR_SIZE=24
+# Cursor settings (match UWSM defaults)
+export HYPRCURSOR_THEME=Future-Cyan-Hyprcursor_Theme
+export HYPRCURSOR_SIZE=48
+export XCURSOR_THEME=Future-Cyan-Hyprcursor_Theme
+export XCURSOR_SIZE=48
+export QT_CURSOR_SIZE=48
 export ELECTRON_OZONE_PLATFORM_HINT=auto
 
 # DBus settings
@@ -50,10 +52,6 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/keyring/ssh"
 
 # Import environment to systemd
 systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP 2>/dev/null
-
-# Kill any stuck processes that might interfere
-pkill -f "xdg-desktop-portal" 2>/dev/null
-sleep 0.5
 
 # Try to start with uwsm first
 log "Attempting to start Hyprland with uwsm..."

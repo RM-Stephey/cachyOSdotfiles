@@ -16,7 +16,7 @@ gsettings set org.gnome.desktop.interface font-name 'Cantarell 11'
 # Export environment variables for dark theme
 export GTK_THEME="oomox-cyberpunk-neon"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc"
-export QT_QPA_PLATFORMTHEME="hyprqt6engine"
+export QT_QPA_PLATFORMTHEME="qt6ct"
 
 # Create GTK-2.0 dark theme config
 mkdir -p ~/.config/gtk-2.0
@@ -117,7 +117,7 @@ cat > ~/.config/environment.d/50-dark-theme.conf << EOF
 # Dark theme environment variables
 GTK_THEME=oomox-cyberpunk-neon
 GTK2_RC_FILES=$HOME/.config/gtk-2.0/gtkrc
-QT_QPA_PLATFORMTHEME=hyprqt6engine
+QT_QPA_PLATFORMTHEME=qt6ct
 GTK_USE_DARK_THEME=1
 ELECTRON_FORCE_DARK_MODE=1
 EOF
@@ -156,9 +156,22 @@ if command -v flatpak >/dev/null 2>&1; then
     flatpak override --user --env=GTK_APPLICATION_PREFER_DARK_THEME=1
 fi
 
-# Notify systemd of environment changes
-systemctl --user import-environment GTK_THEME GTK_USE_DARK_THEME
+# Notify systemd of environment changes - import ALL theme variables
+systemctl --user import-environment \
+    GTK_THEME \
+    GTK_USE_DARK_THEME \
+    GTK2_RC_FILES \
+    QT_QPA_PLATFORMTHEME \
+    ELECTRON_FORCE_DARK_MODE
+
+# Also update dbus-daemon environment
+dbus-update-activation-environment --systemd \
+    GTK_THEME \
+    GTK_USE_DARK_THEME \
+    GTK2_RC_FILES \
+    QT_QPA_PLATFORMTHEME \
+    ELECTRON_FORCE_DARK_MODE 2>/dev/null || true
 
 echo "Dark theme setup complete!"
-echo "Some applications may need to be restarted to apply the theme."
-echo "For a full effect, consider logging out and back in."
+echo "Environment variables exported to systemd user services."
+echo "Theme should now apply to all apps including Ulauncher and Nextcloud."

@@ -5,8 +5,14 @@
 #
 
 # Essential variables that might be missing from SDDM
+# Force proper expansion of HOME - greetd may pass literal tilde
 export USER="${USER:-$(whoami)}"
-export HOME="${HOME:-/home/$USER}"
+# Always expand HOME properly, even if set to ~
+if [ "$HOME" = "~" ] || [ -z "$HOME" ]; then
+    export HOME="/home/$USER"
+fi
+# Ensure HOME is absolute
+export HOME="$(eval echo $HOME)"
 export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
@@ -43,6 +49,11 @@ if [ -f "$HOME/.config/uwsm/env" ]; then
     . "$HOME/.config/uwsm/env"
 fi
 
+# Clear XDG_CURRENT_DESKTOP to prevent duplication
+# UWSM will set it properly based on the desktop file
+unset XDG_CURRENT_DESKTOP
+
 # Launch UWSM with all arguments passed through
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] Executing: uwsm start -- hyprland" >> "$LOG_FILE"
-exec uwsm start -- hyprland 2>&1 | tee -a "$LOG_FILE"
+# Use the desktop file as recommended in the wiki
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Executing: uwsm start hyprland-uwsm.desktop" >> "$LOG_FILE"
+exec uwsm start hyprland-uwsm.desktop 2>&1 | tee -a "$LOG_FILE"

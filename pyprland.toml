@@ -5,5 +5,7 @@ plugins = ["scratchpads"]
 animation = "fromRight"
 command = "kitty --class term_kitty"
 class = "term_kitty"
+size = "75% 60%"
+max_size = "1920px 100%"
 focus_on_visible = true
 lazy = true
