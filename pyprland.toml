@@ -1,6 +1,16 @@
 [pyprland]
 plugins = ["scratchpads"]
 
+[scratchpads.term_ghostty]
+animation = "fromRight"
+command = "env __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia ghostty --class=term_ghostty"
+class = "term_ghostty"
+size = "75% 60%"
+max_size = "1920px 100%"
+focus_on_visible = true
+lazy = true
+
+# Keep Kitty as backup option
 [scratchpads.term_kitty]
 animation = "fromRight"
 command = "kitty --class term_kitty"
