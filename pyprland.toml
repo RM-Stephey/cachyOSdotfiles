@@ -2,12 +2,12 @@
 plugins = ["scratchpads"]
 
 [scratchpads.ghostty]
-animation = "fromRight"
+animation = "fromBottom"
 # Launch Ghostty with its real class; simple name to avoid dotted-table issues
-command = "ghostty --class=com.mitchellh.ghostty --title=ghostty"
+command = "env __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia ghostty --class=com.mitchellh.ghostty --title=ghostty"
 class = "com.mitchellh.ghostty"
-size = "75% 60%"
-max_size = "1920px 100%"
+size = "80% 60%"
+max_size = "1000px 100%"
 focus_on_visible = true
 lazy = true
 
