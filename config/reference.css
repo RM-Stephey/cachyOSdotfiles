@@ -1,0 +1,298 @@
+/*
+ * Cyberpunk Neon Glow Effect Reference
+ * Adapted from Synthwave '2077 by codesacha
+ * Colors remapped to match Hyprland/Ghostty/Quickshell neon palette
+ * 
+ * HOW IT WORKS:
+ * - Uses multiple layered text-shadow values to create a neon glow
+ * - First shadow is a dark base (#100c0f) for depth
+ * - Subsequent shadows are the neon color with varying blur + reduced alpha
+ * - 8-digit hex: last 2 digits = alpha (88 = ~53%, 66 = ~40%, 44 = ~27%)
+ * 
+ * COLOR MAPPING (Synthwave '2077 → Your Palette):
+ *   #00d4b1 → #06f5d6  (cyan)
+ *   #f92aad → #ff2e97  (hot pink)
+ *   #6d77b3 → #8b5cf6  (violet)
+ *   #fffd91 → #f9f972  (yellow)
+ *   #ff5680 → #ff0055  (red)
+ *   #fff5f6 → #f0f0ff  (bright white)
+ *   #a0fffc → #00e5ff  (electric cyan)
+ *   #f4eee4 → #d9bcd5  (muted fg)
+ *   #ffcfec → #ff00ff  (neon pink)
+ *   Background: #262335 → #10122a
+ */
+
+/* ============================================
+   CSS CUSTOM PROPERTIES (for easy reuse)
+   ============================================ */
+  :root {
+    /* Neon Colors - synced with colors.conf */
+    --neon-cyan: #06f5d6;
+    --neon-pink: #ff00ff;
+    --neon-hot-pink: #ff2e97;
+    --neon-purple: #c210ff;
+    --neon-violet: #8b5cf6;
+    --neon-yellow: #f9f972;
+    --neon-red: #ff0055;
+    --neon-ice: #b0e0ff;
+    --neon-muted: #d9bcd5;
+    --neon-electric: #00e5ff;
+    --neon-blue: #00d8ff;
+    --neon-green: #00ff9f;
+  
+    /* Background palette */
+    --bg-deep: #10122a;
+    --bg-dark: #131424;
+    --bg-medium: #1a0a19;
+  
+    /* Glow Shadows (ready to use as text-shadow values) */
+    --glow-cyan: 0 0 2px #100c0f, 0 0 3px #06f5d688, 0 0 5px #06f5d666, 0 0 8px #06f5d644;
+    --glow-pink: 0 0 2px #100c0f, 0 0 3px #ff00ff88, 0 0 5px #ff00ff66, 0 0 8px #ff00ff44;
+    --glow-hot-pink: 0 0 2px #100c0f, 0 0 3px #ff2e9788, 0 0 5px #ff2e9766;
+    --glow-purple: 0 0 2px #100c0f, 0 0 3px #c210ff88, 0 0 5px #c210ff66, 0 0 8px #c210ff44;
+    --glow-violet: 0 0 2px #2a1d5e, 0 0 3px #8b5cf688, 0 0 5px #8b5cf666;
+    --glow-yellow: 0 0 1px #7a7540, 0 0 3px #f9f97288, 0 0 5px #f9f97266, 0 0 8px #f9f97244;
+    --glow-red: 0 0 2px #660028, 0 0 3px #ff005588, 0 0 5px #ff005566, 0 0 8px #ff005544;
+    --glow-ice: 0 0 2px #1a3050, 0 0 3px #b0e0ff88, 0 0 5px #b0e0ff66, 0 0 8px #b0e0ff44;
+    --glow-electric: 0 0 2px #003844, 0 0 3px #00e5ff88, 0 0 5px #00e5ff66, 0 0 8px #00e5ff44;
+    --glow-blue: 0 0 2px #003040, 0 0 3px #00d8ff88, 0 0 5px #00d8ff66, 0 0 8px #00d8ff44;
+    --glow-green: 0 0 2px #003320, 0 0 3px #00ff9f88, 0 0 5px #00ff9f66, 0 0 8px #00ff9f44;
+  }
+  
+  /* ============================================
+     UTILITY CLASSES (for general use)
+     ============================================ */
+  .glow-cyan {
+    color: #06f5d6;
+    text-shadow: 0 0 2px #100c0f, 0 0 3px #06f5d688, 0 0 5px #06f5d666, 0 0 8px #06f5d644;
+  }
+  
+  .glow-pink {
+    color: #ff00ff;
+    text-shadow: 0 0 2px #100c0f, 0 0 3px #ff00ff88, 0 0 5px #ff00ff66, 0 0 8px #ff00ff44;
+  }
+  
+  .glow-hot-pink {
+    color: #ff2e97;
+    text-shadow: 0 0 2px #100c0f, 0 0 3px #ff2e9788, 0 0 5px #ff2e9766;
+  }
+  
+  .glow-hot-pink-strong {
+    color: #ff2e97;
+    text-shadow: 0 0 1px #cc0050, 0 0 3px #ff2e97aa, 0 0 5px #ff2e9788;
+  }
+  
+  .glow-purple {
+    color: #c210ff;
+    text-shadow: 0 0 2px #100c0f, 0 0 3px #c210ff88, 0 0 5px #c210ff66, 0 0 8px #c210ff44;
+  }
+  
+  .glow-violet {
+    color: #8b5cf6;
+    text-shadow: 0 0 2px #2a1d5e, 0 0 3px #8b5cf688, 0 0 5px #8b5cf666;
+  }
+  
+  .glow-yellow {
+    color: #f9f972;
+    text-shadow: 0 0 1px #7a7540, 0 0 3px #f9f97288, 0 0 5px #f9f97266, 0 0 8px #f9f97244;
+  }
+  
+  .glow-red {
+    color: #ff0055;
+    text-shadow: 0 0 2px #660028, 0 0 3px #ff005588, 0 0 5px #ff005566, 0 0 8px #ff005544;
+  }
+  
+  .glow-ice {
+    color: #b0e0ff;
+    text-shadow: 0 0 2px #1a3050, 0 0 3px #b0e0ff88, 0 0 5px #b0e0ff66, 0 0 8px #b0e0ff44;
+  }
+  
+  .glow-electric {
+    color: #00e5ff;
+    text-shadow: 0 0 2px #003844, 0 0 3px #00e5ff88, 0 0 5px #00e5ff66, 0 0 8px #00e5ff44;
+  }
+  
+  .glow-blue {
+    color: #00d8ff;
+    text-shadow: 0 0 2px #003040, 0 0 3px #00d8ff88, 0 0 5px #00d8ff66, 0 0 8px #00d8ff44;
+  }
+  
+  .glow-green {
+    color: #00ff9f;
+    text-shadow: 0 0 2px #003320, 0 0 3px #00ff9f88, 0 0 5px #00ff9f66, 0 0 8px #00ff9f44;
+  }
+  
+  .glow-muted {
+    color: #d9bcd5;
+    text-shadow: 0 0 4px #231022, 0 0 3px #d9bcd566, 0 0 5px #d9bcd544;
+  }
+  
+  /* ============================================
+     MONACO EDITOR CLASSES (VS Code/Cursor)
+     ============================================ */
+  .mtk1 /* Variables - Neon Cyan */ {
+    color: #06f5d6;
+    text-shadow: 0 0 2px #100c0f, 0 0 3px #06f5d688, 0 0 5px #06f5d666, 0 0 8px #06f5d644;
+  }
+  
+  .mtk3 /* Comments - Violet */ {
+    color: #8b5cf6;
+    text-shadow: 0 0 2px #2a1d5e, 0 0 3px #8b5cf688, 0 0 5px #8b5cf666;
+  }
+  
+  .mtk4 /* Types/Modules - Cyan strong */ {
+    color: #06f5d6;
+    text-shadow: 0 0 4px #100c0f, 0 0 3px #06f5d688, 0 0 5px #06f5d666, 0 0 8px #06f5d644;
+  }
+  
+  .mtk6 /* Keywords - Hot Pink */ {
+    color: #ff2e97;
+    text-shadow: 0 0 2px #100c0f, 0 0 3px #ff2e9766, 0 0 4px #f0f0ff33;
+  }
+  
+  .mtk7 /* Strings - Ice Blue */ {
+    color: #b0e0ff;
+    text-shadow: 0 0 2px #1a3050, 0 0 3px #b0e0ff88, 0 0 5px #b0e0ff66, 0 0 8px #b0e0ff44;
+  }
+  
+  .mtk8 /* Decorators - Muted */ {
+    color: #d9bcd5;
+    text-shadow: 0 0 4px #231022, 0 0 3px #d9bcd566, 0 0 5px #d9bcd544;
+  }
+  
+  .mtk9 /* Constants - Electric Cyan */ {
+    color: #00e5ff;
+    text-shadow: 0 0 1px #003844, 0 0 3px #00e5ff88, 0 0 5px #00e5ff66, 0 0 8px #00e5ff44;
+  }
+  
+  .mtk10 /* Builtin Types - Blue */ {
+    color: #00d8ff;
+    text-shadow: 0 0 1px #003040, 0 0 3px #00d8ff88, 0 0 5px #00d8ff66, 0 0 8px #00d8ff44;
+  }
+  
+  .mtk11 /* Numbers - Yellow */ {
+    color: #f9f972;
+    text-shadow: 0 0 1px #7a7540, 0 0 3px #f9f97288, 0 0 5px #f9f97266, 0 0 8px #f9f97244;
+  }
+  
+  .mtk12 /* Units/Operators - Red */ {
+    color: #ff0055;
+    text-shadow: 0 0 2px #660028, 0 0 3px #ff005588, 0 0 5px #ff005566, 0 0 8px #ff005544;
+  }
+  
+  .mtk13 /* Attributes - Neon Pink */ {
+    color: #ff00ff;
+    text-shadow: 0 0 2px #660066, 0 0 3px #ff00ffaa, 0 0 5px #ff00ff88;
+  }
+  
+  .mtk14 /* Misc - Muted */ {
+    color: #d9bcd5;
+    text-shadow: 0 0 4px #231022, 0 0 3px #d9bcd566, 0 0 5px #d9bcd544;
+  }
+  
+  .mtk16 /* Properties - Hot Pink Strong */ {
+    color: #ff2e97;
+    text-shadow: 0 0 1px #cc0050, 0 0 3px #ff2e97aa, 0 0 5px #ff2e9788;
+  }
+  
+  /* ============================================
+     UI ELEMENTS (tabs, icons, etc.)
+     ============================================ */
+  
+  /* Active tab with neon gradient */
+  .neon-tab-active {
+    background-image: linear-gradient(to bottom, #00e5ff25, #ff00ff25);
+    position: relative;
+  }
+  
+  /* Neon stripe under active tab */
+  .neon-tab-active::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, #ff2e97ee, #06f5d6) !important;
+    opacity: 1;
+    z-index: 6;
+  }
+  
+  /* Glowing icon effect */
+  .neon-icon-glow {
+    filter: drop-shadow(0 0 5px #06f5d6);
+  }
+  
+  /* ============================================
+     BACKGROUND RECOMMENDATIONS
+     ============================================ */
+  /*
+   * For best results, use these glow effects on dark backgrounds:
+   * - #10122a (Ghostty deep space - primary)
+   * - #131424 (Ghostty palette black)
+   * - #1a0a19 (Hyprland bg_darkest)
+   * - #231022 (Hyprland bg_dark / aubergine)
+   * - #351834 (Hyprland bg_medium)
+   * 
+   * Example:
+   * body {
+   *   background-color: #10122a;
+   *   color: #f0f0ff;
+   * }
+   */
+  
+  /* ============================================
+     ANIMATION EXTRAS (optional)
+     ============================================ */
+  @keyframes neon-flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      text-shadow: 0 0 2px #100c0f, 0 0 3px #06f5d688, 0 0 5px #06f5d666, 0 0 8px #06f5d644;
+    }
+    20%, 24%, 55% {
+      text-shadow: none;
+    }
+  }
+  
+  @keyframes neon-pulse {
+    0%, 100% {
+      text-shadow: 0 0 2px #100c0f, 0 0 3px #06f5d688, 0 0 5px #06f5d666, 0 0 8px #06f5d644;
+    }
+    50% {
+      text-shadow: 0 0 4px #100c0f, 0 0 8px #06f5d688, 0 0 12px #06f5d666, 0 0 16px #06f5d644;
+    }
+  }
+  
+  @keyframes neon-pulse-pink {
+    0%, 100% {
+      text-shadow: 0 0 2px #100c0f, 0 0 3px #ff00ff88, 0 0 5px #ff00ff66;
+    }
+    50% {
+      text-shadow: 0 0 4px #100c0f, 0 0 8px #ff00ff88, 0 0 12px #ff00ff66, 0 0 16px #ff00ff44;
+    }
+  }
+  
+  @keyframes neon-pulse-electric {
+    0%, 100% {
+      text-shadow: 0 0 2px #003844, 0 0 3px #00e5ff88, 0 0 5px #00e5ff66;
+    }
+    50% {
+      text-shadow: 0 0 4px #003844, 0 0 8px #00e5ff88, 0 0 12px #00e5ff66, 0 0 16px #00e5ff44;
+    }
+  }
+  
+  .glow-flicker {
+    animation: neon-flicker 3s infinite;
+  }
+  
+  .glow-pulse {
+    animation: neon-pulse 2s ease-in-out infinite;
+  }
+  
+  .glow-pulse-pink {
+    animation: neon-pulse-pink 2s ease-in-out infinite;
+  }
+  
+  .glow-pulse-electric {
+    animation: neon-pulse-electric 2s ease-in-out infinite;
+  }
+  
